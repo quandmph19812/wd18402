@@ -8,7 +8,7 @@ function danhmuc(){
 }
 
 function index(){
-    $title = 'trang chủ';
+
     $view = 'trangchu';
 
     $dataDanhMuc = listAll('danhmuc');
@@ -17,6 +17,8 @@ function index(){
 
     require_once PATH_VIEW . 'layouts/master.php';
 }
+
+
 // luồng mvc 1: vào index
 // vào index -> được điều hướng đến hàm xử lý logic trong controller tương ứng
 // -> hàm sẽ trả view luôn vì không có tương tác với model

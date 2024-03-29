@@ -1,15 +1,35 @@
 <?php
 
-function timKiemSanPham($keyword)
+// hàm lấy dữ liệu từ database
+// function getAllProduct()
+// {
+//     try {
+//         $sql = 'SELECT * FROM sanpham';
+
+//         $stmt = $GLOBALS['conn']->prepare($sql);
+
+//         $stmt->execute();
+
+//         return $stmt->fetchAll();
+//     } catch (\Exception $e) {
+//         debug($e);
+//     }
+// }
+
+function getAllProduct($kyw, $iddm)
 {
     try {
-        $sql = "SELECT * FROM sanpham JOIN anhsanpham ON sanpham.SanPhamID = anhsanpham.ID_SanPham  WHERE sanpham.TenSanPham LIKE :keyword";
+        $sql = 'SELECT * FROM sanpham WHERE 1';
+
+        if (!empty($kyw)) {
+            $sql .= " AND TenSanPham LIKE '%" . $kyw . "%'";
+        }
+
+        if ($iddm > 0) {
+            $sql .= " AND ID_DanhMuc ='" . $iddm . "'";
+        }
 
         $stmt = $GLOBALS['conn']->prepare($sql);
-
-        $keyword = "%{$keyword}%";
-
-        $stmt->bindParam(':keyword', $keyword);
 
         $stmt->execute();
 
@@ -35,10 +55,9 @@ function getAllProduct_new()
     }
 }
 
-function getProductByID($id)
-{
+function getProductByID($id){
     try {
-        $sql = 'SELECT * FROM sanpham WHERE ID_SanPham = :id';
+        $sql = 'SELECT * FROM sanpham WHERE SanPhamID = :id';
 
         $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -52,8 +71,7 @@ function getProductByID($id)
     }
 }
 
-function loadall_sanpham_danhmuc($iddm)
-{
+function loadall_sanpham_danhmuc($iddm) {
     try {
         $sql = "SELECT * FROM sanpham WHERE ID_DanhMuc = :iddm ORDER BY ID_SanPham DESC";
         $stmt = $GLOBALS['conn']->prepare($sql);
@@ -69,8 +87,7 @@ function loadall_sanpham_danhmuc($iddm)
     }
 }
 
-function load_ten_dm($iddm)
-{
+function load_ten_dm($iddm) {
     try {
         if ($iddm > 0) {
             $sql = "SELECT TenDanhMuc FROM danhmuc WHERE ID_DanhMuc = :iddm";
@@ -94,3 +111,31 @@ function load_ten_dm($iddm)
         return "";
     }
 }
+
+function searchProductInCatalogue()
+{
+// Check if the keyword is provided in the URL
+if(isset($_GET['keyword'])) {
+    $keyword = $_GET['keyword'];
+
+    // Perform the search query
+    $sql = "SELECT * FROM sanpham WHERE TenSanPham LIKE :keyword";
+    $stmt = $GLOBALS['conn']->prepare($sql);
+    $stmt->bindValue(':keyword', "%$keyword%", PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // // Output the search results
+    // foreach($results as $product) {
+    //     echo $product['TenSanPham']; // Output whatever information you need
+    // }
+}
+
+}
+
+// Assume you have some database connection available
+
+
+
+
+

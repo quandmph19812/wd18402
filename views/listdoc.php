@@ -48,6 +48,15 @@
 					</div>
 				</div>
 			<?php endforeach ?>
+			
+			<?php if (isset($search_results)) : ?>
+							<h2>Search Results</h2>
+							<ul>
+								<?php foreach ($search_results as $product) : ?>
+									<li><?= $product['TenSanPham'] ?></li> <!-- Display whatever information you need -->
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
 			<!-- <div class="row row_item">
 	                    <div class="col-sm-4">
 	                        <figure>
@@ -84,7 +93,7 @@
 	<!-- /container -->
 </main>
 <!-- /main -->
-<script src="<?= BASE_URL ?>assets/client/client/js/specific_listing.js"></script>
+<script src="js/specific_listing.js"></script>
 <script>
 	// Sticky sidebar
 	$('#sidebar_fixed').theiaStickySidebar({

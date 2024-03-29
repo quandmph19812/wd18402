@@ -105,10 +105,10 @@
 								<?= $item['TenSanPham'] ?>
 							</div>
 							<div class="price_box">
-								<span class="new_price"><?= $item['GiaSP'] ?></span>
+								<span class="new_price"><?= number_format($item['GiaSP']) ?>đ</span>
 							</div>
 						</a>
-						<button class="btn_1">them vao gio hang</button>
+						<a href="<?= BASE_URL . "?act=cart-add&productID=" .$item['SanPhamID'] ?>"><abutton class="btn_1">Thêm vào giỏ hàng</button></a>
 					</div>
 				</div>
 			<?php endforeach; ?>
@@ -154,10 +154,10 @@
 								<?= $item['TenSanPham'] ?>
 							</div>
 							<div class="price_box">
-								<span class="new_price"><?= $item['GiaSP'] ?></span>
+								<span class="new_price"><?= number_format($item['GiaSP']) ?>đ</span>
 							</div>
 						</a>
-						<button class="btn_1">them vao gio hang</button>
+						<a href="<?= BASE_URL . "?act=cart-add&productID=" .$item['SanPhamID'] ?>"><button class="btn_1">Thêm vào giỏ hàng</button></a>
 					</div>
 				</div>
 			<?php endforeach; ?>
@@ -197,6 +197,7 @@
 			foreach ($dataSanPham as $item) : ?>
 				<div class="item">
 					<div class="grid_item">
+					<span class="ribbon new">New</span>
 						<a href="<?= BASE_URL ?>?act=chi-tiet&id=<?= $item['SanPhamID'] ?>">
 							<div style="color: black;">
 								<figure>
@@ -205,10 +206,10 @@
 								<?= $item['TenSanPham'] ?>
 							</div>
 							<div class="price_box">
-								<span class="new_price"><?= $item['GiaSP'] ?></span>
+								<span class="new_price"><?= number_format($item['GiaSP']) ?>đ</span>
 							</div>
 						</a>
-						<button class="btn_1">them vao gio hang</button>
+						<a href="<?= BASE_URL . "?act=cart-add&productID=" .$item['SanPhamID'] ?>"><button class="btn_1">Thêm vào giỏ hàng</button></a>
 					</div>
 				</div>
 			<?php endforeach; ?>
