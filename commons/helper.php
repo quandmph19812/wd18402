@@ -32,3 +32,42 @@ if (!function_exists('e404')) {
         die;
     }
 }
+
+if (!function_exists('middleware_auth_check')) {
+    function middleware_auth_check($act, $arrRouteNeedAuth)
+    {
+        if ($act == 'login') {
+            if (!empty($_SESSION['user'])) {
+                header('Location: ' . BASE_URL);
+                exit();
+            }
+        } elseif (empty($_SESSION['user']) && in_array($act, $arrRouteNeedAuth)) {
+            header('Location: ' . BASE_URL . '?act=login');
+            exit();
+        }
+    }
+}
+
+function list_of_price()
+{
+    $list = [
+        1 => "Dưới 10 triệu",
+        2 => "Từ 10 triệu đến 20 triệu",
+        3 => "Từ 20 triệu đến 30 triệu",
+        4 => "Trên 30 triệu"
+    ];
+    return $list;
+}
+
+if (!function_exists('calculate_total_order')) {
+    function caculator_total_order($flag = true) {
+        if (isset($_SESSION['cart'])) {
+            $total = 0;
+            foreach ($_SESSION['cart'] as $item) {
+                $total += $item['GiaSP'] * $item['quantity']; // Accumulate the total
+            }
+            return $flag ? number_format($total)  : $total;
+        }
+        return 0;
+    }
+}
