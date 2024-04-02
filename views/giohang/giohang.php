@@ -66,7 +66,7 @@ if (empty($_SESSION['cart'])) {
 							</td>
 							<td>
 								<a href="<?= BASE_URL . '?act=cart-dec&productID=' . $item['SanPhamID'] ?>" class="btn">-</a>
-								<input type="text" disabled style="width: 40px;" value="<?= $item['quantity'] ?>">
+								<input type="text" disabled style="width: 30px;" value="<?= $item['quantity'] ?>">
 								<a href="<?= BASE_URL . '?act=cart-inc&productID=' . $item['SanPhamID'] ?>" class="btn">+</a>
 							</td>
 							<td>

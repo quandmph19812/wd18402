@@ -22,7 +22,7 @@
                     <h1><?= $dataSanPham['TenSanPham'] ?></h1>
                     <div class="row">
                         <div class="col-lg-5 col-md-6">
-                            <div class="price_main"><span class="new_price">$<?= number_format($dataSanPham['GiaSP']) ?>đ</span></div>
+                            <div class="price_main"><span class="new_price">Giá: <?= number_format($dataSanPham['GiaSP']) ?>đ</span></div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <a href="<?= BASE_URL . "?act=cart-add&productID=" .$dataSanPham['SanPhamID'] ?>"><button class="btn_1">Thêm vào giỏ hàng </button></a>

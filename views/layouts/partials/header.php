@@ -160,7 +160,6 @@
 												} ?>
 											</ul>
 											<div class="total_drop">
-												<div class="clearfix"><strong>Tổng tiền: </strong><span>$<?= !empty($_SESSION['cart']) ? $_SESSION['resultTotal'] : 0 ?></span></div>
 												<a href="index.php?act=cart-list" class="btn_1 outline">Xem giỏ hàng</a><a href="index.php?act=thanhtoan" class="btn_1">Thanh Toán</a>
 											</div>
 										</div>
@@ -171,14 +170,14 @@
 								</li>
 								<li>
 									<div class="dropdown dropdown-access">
-										<a href="index.php?act=qltk" class="access_link"><span>Tài Khoản</span></a>
+										<a href="#" class="access_link"><span>Tài Khoản</span></a>
 										<div class="dropdown-menu">
 											<?php
 											if (isset($_SESSION['user'])) {
 												extract($_SESSION['user']);
 											?>
 												<div class="user_name">
-													Xin Chào <?php echo $hoten_user ?>
+													Xin Chào <?php echo $name ?>
 												</div>
 											<?php
 											} else {
@@ -187,10 +186,10 @@
 											<?php } ?>
 											<ul>
 												<li>
-													<a href="index.php?act=kiemtradonhang"><i class="ti-package"></i>Đơn hàng của tôi</a>
+													<a href="<?= BASE_URL . "?act=kiemtradonhang&id=" .$id ?>"><i class="ti-package"></i>Đơn hàng của tôi</a>
 												</li>
 												<li>
-													<a href="index.php?act=qltk"><i class="ti-user"></i>Cập nhật tài khoản</a>
+													<a href="<?= BASE_URL . "?act=updatetk&id=" .$id ?>"><i class="ti-user"></i>Cập nhật tài khoản</a>
 												</li>
 												<li>
 													<a href="<?= BASE_URL . '?act=logout' ?>"><i class="ti-user"></i>Đăng Xuất</a>

@@ -33,13 +33,13 @@
 							<!-- /row -->
 							<div class="form-group">
 								Địa chỉ :
-								<input type="text" class="form-control" name="user_address" id="user_address" required>
+								<input type="text" class="form-control" value="<?= $_SESSION['user']['diachi'] ?>" name="user_address" id="user_address" required>
 							</div>
 							<!-- /row -->
 							<!-- /row -->
 							<div class="form-group">
 								Số điện thoại :
-								<input type="text" class="form-control" required name="user_phone" id="user_phone">
+								<input type="text" class="form-control" required value="<?= $_SESSION['user']['tel'] ?>" name="user_phone" id="user_phone">
 							</div>
 							<div id="other_addr_c" class="pt-2">
 							<!-- /row -->

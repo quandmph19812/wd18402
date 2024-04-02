@@ -19,12 +19,13 @@ function orderPurchase()
             $orderID = insert_get_last_id('orders', $data);
 
             foreach ($_SESSION['cart'] as $productID => $item) {
-                $price = isset($item['giaSP']) ? $item['giaSP'] : 0;
+                // $price = isset($item['giaSP']) ? $item['giaSP'] : 0;
                 $orderItem = [
                     'order_id'      => $orderID,
                     'product_id'    => $productID,
+                    'product_name'  => $item['TenSanPham'],
                     'quantity'      => $item['quantity'],
-                    'price'         => $price,
+                    'price'         => $item['GiaSP'],
                 ];
 
                 insert('order_items', $orderItem);
@@ -50,4 +51,32 @@ function orderPurchase()
 function orderSuccess()
 {
     require_once PATH_VIEW . 'giohang/order-success.php';
+}
+
+function KiemTraDonHang($id) {
+    $DonHang = showOne2table('orders','users','user_id','id','user_id',$id) ;
+
+    if (empty($DonHang)) {
+        $_SESSION['error'] = 'Không có gì!';
+
+    }
+
+    $title = 'Chi Tiết Đơn Hàng';
+    require_once PATH_VIEW . 'giohang/kiemtradonhang.php';
+
+}
+
+function XemSpDonHang($id) {
+    // $DonHangDaMua = showOne2table('order_items','orders','order_id','id','order_id',$id) ;
+
+    $DonHangDaMua = showOne2table('orders','order_items','id','order_id','id',$id) ;
+
+
+    
+    if (empty($DonHangDaMua)) {
+        $_SESSION['error'] = 'Không có gì!';
+    }
+    
+    require_once PATH_VIEW . 'giohang/xemspdonhang.php';
+
 }

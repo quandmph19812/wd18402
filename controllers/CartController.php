@@ -7,7 +7,7 @@ function cartAdd($productID, $quantity = 1)
     $product = showOne2table('sanpham', 'anhsanpham', 'SanPhamID', 'ID_SanPham', 'SanPhamID', $productID);
 
     
-    $cartID = getCartID($_SESSION['user']['id']);
+    // $cartID = getCartID($_SESSION['user']['id']);
 
 
     // $_SESSION['cartID'] = $cartID;
