@@ -59,7 +59,6 @@ match ($act) {
     'updatetk' => updateTk($_GET['id']),
 
     'kiemtradonhang' => KiemTraDonHang($_GET['id']),
-    'xemspdonhang' => XemSpDonHang($_GET['id']),
 };
 
 
