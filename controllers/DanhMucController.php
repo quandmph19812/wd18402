@@ -9,3 +9,4 @@ function SanPhamList($id){
     require_once PATH_VIEW . 'layouts/master.php';
 }
 
+

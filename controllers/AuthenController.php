@@ -1,14 +1,16 @@
-<?php 
+<?php
 
-function authenShowFormLogin() {
+function authenShowFormLogin()
+{
     if ($_POST) {
         authenLogin();
     }
 
-    require_once PATH_VIEW . 'authen/login.php';
+    require_once PATH_VIEW . 'authen/dangnhap_dangky.php';
 }
 
-function authenLogin() {
+function authenLogin()
+{
     $user = getUserClientByEmailAndPassword($_POST['email'], $_POST['password']);
 
     if (empty($user)) {
@@ -24,11 +26,51 @@ function authenLogin() {
     exit();
 }
 
-function authenLogout() {
+function authenLogout()
+{
     if (!empty($_SESSION['user'])) {
         session_destroy();
     }
 
     header('Location: ' . BASE_URL);
     exit();
+}
+
+function Qltk()
+{
+    
+    require_once PATH_VIEW . 'authen/qltk.php';
+}
+
+function updatetk($id)
+{
+    $TaiKhoan = showOne('users', 'id', $id);
+
+    if (empty($TaiKhoan)) {
+        e404();
+    }
+
+    $title = 'cập nhật tài khoản';
+
+    if (!empty($_POST)) {
+
+        $data = [
+            'name' => $_POST['name'],
+            'hoten_user' => $_POST['hoten_user'],
+            'diachi' => $_POST['diachi'],
+            'tel' => $_POST['tel'],
+        ];
+
+        update('users', 'id',  $id, $data);
+        $thongbao = "Cap nhat thanh cong";
+
+
+        header('Location: ' . BASE_URL . '?act=updatetk&id=' . $id);
+
+        exit;
+        
+    }
+
+
+    require_once PATH_VIEW . 'authen/qltk.php';
 }

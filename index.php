@@ -20,11 +20,11 @@ $act = $_GET['act'] ?? '/';
 
 
 $arrRouteNeedAuth = [
-    'cart-add',
-    'cart-list',
-    'cart-inc',
-    'cart-dec',
-    'cart-del',
+    // 'cart-add',
+    // 'cart-list',
+    // 'cart-inc',
+    // 'cart-dec',
+    // 'cart-del',
     'order-checkout',
     'order-purchase',
     'order-success',
@@ -53,6 +53,13 @@ match ($act) {
     'san-pham' => SanPhamList($_GET['id']),
     'chi-tiet' => chitietsp($_GET['id']),
     'listdoc' => SanPhamList($_GET['id']),
+
+
+    'qltk' => Qltk(),
+    'updatetk' => updateTk($_GET['id']),
+
+    'kiemtradonhang' => KiemTraDonHang($_GET['id']),
+    'xemspdonhang' => XemSpDonHang($_GET['id']),
 };
 
 
