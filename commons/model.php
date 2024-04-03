@@ -259,6 +259,25 @@ if (!function_exists('list3table')) {
     }
 }
 
+if (!function_exists('list3table2')) {
+    function list3table2($tableName1, $tableName2, $tableName3, $name1, $name2, $name3,  $name4, $idName,$id)
+    {
+        try {
+            $sql = "SELECT * FROM $tableName1 JOIN $tableName2 ON $tableName1.$name1 = $tableName2.$name2 JOIN $tableName3 ON $tableName1.$name3 = $tableName3.$name4 WHERE $idName = :id";
+
+            
+            $stmt = $GLOBALS['conn']->prepare($sql);
+            
+            $stmt->bindParam(":id", $id);
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
 if (!function_exists('delete2')) {
     function delete2($tableName, $id) {
         try {

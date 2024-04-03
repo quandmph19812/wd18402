@@ -26,11 +26,20 @@
                                         <?php unset($_SESSION['error']); ?>
                                     <?php endif; ?>
 		
-		<table class="table table-striped cart-list">
+		<table class="table table-striped cart-list kiemtradonhang">
 							<thead>
 								<tr>
 									<th>
 										Thông tin người nhận
+									</th>
+									<th>
+										Sản phẩm
+									</th>
+									<th>
+										Số lượng
+									</th>
+									<th>
+										Giá tiền
 									</th>
 									<th>
 										Thanh toán
@@ -39,17 +48,13 @@
 										Trạng thái
 									</th>
 									<th>
-										Vận chuyển
-									</th>
-									<th>
 										Tổng tiền
 									</th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php 
-								foreach ($DonHang as $item) ?>
+								foreach ($DonHangDaMua as $item) : ;?>
 									<!-- // if($pttt==0){
                                     //     $thanhtoan = "Nhận hàng trả tiền";
                                     // }else{
@@ -70,26 +75,52 @@
 									$xemspdonhang = "index.php?act=xemspdonhang&id=".$id; -->
 									<tr>
 									<td>
-										<h8 class="item_cart"><?=$name.' -- '.$email.' -- '.$tel.' -- '.$diachi ?></h8>
+										<h8 class="item_cart"><?=$item['user_name'].' -- '.$item['user_phone'].' -- '.$item['user_phone'].' -- '.$item['user_address'] ?></h8>
 									</td>
 									<td>
-										<strong><?=$thanhtoan?></strong>
+										<strong><?=$item['product_name']?></strong>
 									</td>
 									<td>
-									<strong><?=$trangthai1?></strong>
+										<strong><?=$item['quantity']?></strong>
 									</td>
 									<td>
-										<strong><?=$vanchuyen?></strong>
+										<strong><?=number_format($item['price'])?>đ</strong>
+									</td>
+									<td>
+										<strong><?php
+										if ($item['status_payment'] == 0) {
+											echo "Trả tiền khi nhận hàng";
+										} elseif ($item['status_payment'] == 1) {
+											echo "Chuyển khoản";
+										} else {
+											// Handle unexpected values
+											echo "Unknown payment method";
+										}
+										?></strong>
+									</td>
+									<td>
+									<strong><?php
+										if ($item['status_delivery'] == 0) {
+											echo "Chờ xác nhận";
+										} elseif ($item['status_delivery'] == 1) {
+											echo "Chờ lấy hàng";
+										} elseif ($item['status_delivery'] == 2) {
+											echo "Chờ giao hàng";
+										} elseif ($item['status_delivery'] == 3) {
+											echo "Đã giao hàng";
+										} else {
+											// Handle unexpected values
+											echo "Unknown payment method";
+										}
+										?></strong>
 									</td>
 									<td class="options">
-										<strong>$<?= $_SESSION['orders']['total_bill']?></strong>
+										<strong>$<?=number_format($item['total_bill'])?>đ</strong>
 									</td>
-									<td class="options">
-									<a href="<?= BASE_URL . "?act=xemspdonhang&id=" .$id ?>"><input type="button" class="btn_1" value ="Xem đơn hàng"></a>
-									</td>
+									
 								</tr>
 								
-								
+								<?php endforeach; ?>
 								
 							</tbody>
 						</table>
