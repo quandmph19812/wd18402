@@ -18,6 +18,17 @@ function index(){
     require_once PATH_VIEW . 'layouts/master.php';
 }
 
+function searchProduct()
+{
+    $keyword = $_GET['keyword'];
+    $cate_id = $_GET['catalog'];
+
+    $products = searchProductInCatalogue($keyword, $cate_id);
+    $catalogues = listAll('danhmuc');
+    $list_of_price = list_of_price();
+    require_once PATH_VIEW . 'listdoc.php';
+}
+
 
 // luồng mvc 1: vào index
 // vào index -> được điều hướng đến hàm xử lý logic trong controller tương ứng
