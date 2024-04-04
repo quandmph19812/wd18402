@@ -32,6 +32,7 @@ match ($act) {
      'san-pham-create' => SanPhamCreate(),
      'san-pham-update' => SanPhamUpdate($_GET['id']),
      'san-pham-delete' => SanPhamDelete($_GET['id']),
+     'anh-san-pham' => AnhSPCreate($_GET['id']),
 };
 
 require_once '../commons/disconnect-db.php';
