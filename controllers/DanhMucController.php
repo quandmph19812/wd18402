@@ -1,6 +1,6 @@
 <?php
 function SanPhamList($id){
-    $title = 'danh mục';
+
     $view = 'listdoc';
 
     $dataDanhMuc = listAll('danhmuc');
@@ -8,3 +8,5 @@ function SanPhamList($id){
 
     require_once PATH_VIEW . 'layouts/master.php';
 }
+
+

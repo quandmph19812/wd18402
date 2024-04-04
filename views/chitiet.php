@@ -22,10 +22,10 @@
                     <h1><?= $dataSanPham['TenSanPham'] ?></h1>
                     <div class="row">
                         <div class="col-lg-5 col-md-6">
-                            <div class="price_main"><span class="new_price">$<?= $dataSanPham['GiaSP'] ?></span></div>
+                            <div class="price_main"><span class="new_price">Giá: <?= number_format($dataSanPham['GiaSP']) ?>đ</span></div>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <button data-id="'.$id.'" class="btn_1" onclick="addToCart(<?= $id ?>,'<?= $name ?>',<?= $price ?>)">Thêm vào giỏ hàng </button>
+                            <a href="<?= BASE_URL . "?act=cart-add&productID=" .$dataSanPham['SanPhamID'] ?>"><button class="btn_1">Thêm vào giỏ hàng </button></a>
                             </form>
                         </div>
                     </div>
@@ -229,10 +229,10 @@
     <!--/feat-->
 
 </main>
-<script src="<?= BASE_URL ?>assets/client/client/js/common_scripts.min.js"></script>
-<script src="<?= BASE_URL ?>assets/client/client/js/main.js"></script>
+<script src="js/common_scripts.min.js"></script>
+<script src="js/main.js"></script>
 <!-- SPECIFIC SCRIPTS -->
-<script src="<?= BASE_URL ?>assets/client/client/js/sticky_sidebar.min.js"></script>
+<script src="js/sticky_sidebar.min.js"></script>
 <script>
     // Sticky sidebar
     $('#sidebar_fixed').theiaStickySidebar({
@@ -242,7 +242,7 @@
     });
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!-- <script>
+<script>
     let totalProduct = document.getElementById('totalProduct')
 
     function addToCart(productId, productName, productPrice) {
@@ -264,4 +264,4 @@
             }
         });
     }
-</script> -->
+</script>

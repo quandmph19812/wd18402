@@ -9,8 +9,8 @@ if (!function_exists('get_str_keys')) {
 }
 
 // lấy chuỗi các giá trị trong keys
-if (!function_exists('get_virtual_param')) {
-    function get_virtual_param($data)
+if (!function_exists('get_virtual_params')) {
+    function get_virtual_params($data)
     {
         $keys = array_keys($data);
 
@@ -46,9 +46,9 @@ if (!function_exists('insert')) {
         try {
             $strKeys = get_str_keys($data);
 
-            $virtualParam = get_virtual_param($data);
+            $virtualParams = get_virtual_params($data);
 
-            $sql = "INSERT INTO $tableName($strKeys) VALUES($virtualParam)";
+            $sql = "INSERT INTO $tableName($strKeys) VALUES($virtualParams)";
             $stmt = $GLOBALS['conn']->prepare($sql);
 
             foreach ($data as $fileName => &$value) {
@@ -62,12 +62,36 @@ if (!function_exists('insert')) {
     }
 }
 
+if (!function_exists('insert_get_last_id')) {
+    function insert_get_last_id($tableName, $data = [])
+    {
+        try {
+            $strKeys = get_str_keys($data);
+            $virtualParams = get_virtual_params($data);
+
+            $sql = "INSERT INTO $tableName($strKeys) VALUES ($virtualParams)";
+
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            foreach ($data as $fieldName => &$value) {
+                $stmt->bindParam(":$fieldName", $value);
+            }
+
+            $stmt->execute();
+
+            return $GLOBALS['conn']->lastInsertId();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
 // lấy ra toàn bộ dự liệu
 if (!function_exists('listAll')) {
     function listAll($tableName)
     {
         try {
-            $sql = "SELECT * FROM $tableName";
+            $sql = "SELECT * FROM $tableName"; 
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -79,6 +103,7 @@ if (!function_exists('listAll')) {
         }
     }
 }
+
 
 // lấy ra 1 dữ liệu
 if (!function_exists('showOne')) {
@@ -100,11 +125,12 @@ if (!function_exists('showOne')) {
     }
 }
 
+
 if (!function_exists('showOne2table')) {
     function showOne2table($tableName1, $tableName2, $Name1, $Name2, $idName, $id)
     {
         try {
-            $sql = "SELECT * FROM $tableName1 JOIN $tableName2 ON $tableName1.$Name1 = $tableName2.$Name2 WHERE $tableName1.$idName = :id";
+            $sql = "SELECT * FROM $tableName1 JOIN $tableName2 ON $tableName1.$Name1 = $tableName2.$Name2 WHERE $tableName1.$idName = :id LIMIT 1";
 
             $stmt = $GLOBALS['conn']->prepare($sql);
 
@@ -227,6 +253,41 @@ if (!function_exists('list3table')) {
             
             $stmt->execute();
             return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
+if (!function_exists('list3table2')) {
+    function list3table2($tableName1, $tableName2, $tableName3, $name1, $name2, $name3,  $name4, $idName,$id)
+    {
+        try {
+            $sql = "SELECT * FROM $tableName1 JOIN $tableName2 ON $tableName1.$name1 = $tableName2.$name2 JOIN $tableName3 ON $tableName1.$name3 = $tableName3.$name4 WHERE $idName = :id";
+
+            
+            $stmt = $GLOBALS['conn']->prepare($sql);
+            
+            $stmt->bindParam(":id", $id);
+            
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (\Exception $e) {
+            debug($e);
+        }
+    }
+}
+
+if (!function_exists('delete2')) {
+    function delete2($tableName, $id) {
+        try {
+            $sql = "DELETE FROM $tableName WHERE id = :id";
+            
+            $stmt = $GLOBALS['conn']->prepare($sql);
+
+            $stmt->bindParam(":id", $id);
+
+            $stmt->execute();
         } catch (\Exception $e) {
             debug($e);
         }

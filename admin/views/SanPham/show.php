@@ -11,7 +11,7 @@
     <div class="app-content"><!--begin::Container-->
         <div class="container-fluid"><!--begin::Row-->
             <div class="row">
-                <div class="col">
+                <div class="col-6">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">chi tiet</h3>

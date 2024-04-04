@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // require file trong commons
 require_once './commons/env.php';
 require_once './commons/helper.php';
@@ -16,15 +18,51 @@ require_file(PATH_MODEL);
 // điều hướng
 $act = $_GET['act'] ?? '/';
 
+
+$arrRouteNeedAuth = [
+    // 'cart-add',
+    // 'cart-list',
+    // 'cart-inc',
+    // 'cart-dec',
+    // 'cart-del',
+    'order-checkout',
+    'order-purchase',
+    'order-success',
+];
+
+middleware_auth_check($act, $arrRouteNeedAuth);
+
 match ($act) {
-     '/' => index(),
-    // 'khachhang' => khachhangDetail($_GET['id']),
-    // 'home' => homeindex(),
+    '/' => index(),
+
+    'cart-add' => cartAdd($_GET['productID']),
+    'cart-list' => cartList(),
+    'cart-inc' => cartInc($_GET['productID']),
+    'cart-dec' => cartDec($_GET['productID']),
+    'cart-delete' => cartDelete($_GET['productID']),
+
+
+    'order-checkout'  => orderCheckout(),
+    'order-purchase'  => orderPurchase(),
+    'order-success'  => orderSuccess(),
+
+
+
+    'login' => authenShowFormLogin(),
+    'logout' => authenLogout(),
     'san-pham' => SanPhamList($_GET['id']),
     'chi-tiet' => chitietsp($_GET['id']),
     'listdoc' => SanPhamList($_GET['id']),
-    'san-pham-tim-kiem' => timkiem($_GET['keyword']),
-        
+
+
+    'qltk' => Qltk(),
+    'updatetk' => updateTk($_GET['id']),
+
+    'kiemtradonhang' => KiemTraDonHang($_GET['id']),
+
+    'search' => searchProduct(),
 };
+
+
 
 require_once './commons/disconnect-db.php';

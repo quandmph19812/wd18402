@@ -3,7 +3,7 @@
         <div class="container-fluid"><!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">quản lý danh mục</h3>
+                    <h3 class="mb-0">quản lý sản phẩm</h3>
                 </div>
             </div><!--end::Row-->
         </div><!--end::Container-->
@@ -14,7 +14,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Danh Mục</h3>
+                            <h3 class="card-title">Sản Phẩm</h3>
                         </div><!-- /.card-header -->
                         <div class="card-body">
                             <table class="table table-bordered">
