@@ -28,6 +28,17 @@
 	<!-- SPECIFIC CSS -->
 	<link href="<?= BASE_URL ?>assets/client/client/css/home_1.css" rel="stylesheet">
 
+	<script>
+        let submit = document.querySelector('#submit');
+        let catalog = document.querySelector('#catalog');
+        let keyword = document.querySelector('#keyword');
+
+        submit.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = "<?= BASE_URL ?>?act=search&keyword=" + keyword.value + "&catalog=" + catalog.value;
+        })
+    </script>
+
 
 
 
@@ -120,7 +131,7 @@
 						<div class=" col-xl-6 col-lg-7 col-md-6 d-none d-md-block">
 							<div class="custom-search-input">
 
-								<form action="index.php?act=search" method="get">
+								<form action="index.php?act=search" method="post">
 									<input type="text" placeholder="Tìm kiếm sản phẩm..." name="keyword" id="keyword">
 									<button type="submit" id="submit"><i class="header-icon_search_custom"></i></button>
 								</form>
