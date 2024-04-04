@@ -32,6 +32,13 @@ match ($act) {
      'san-pham-create' => SanPhamCreate(),
      'san-pham-update' => SanPhamUpdate($_GET['id']),
      'san-pham-delete' => SanPhamDelete($_GET['id']),
+
+     // crud user
+    'users' => userListAll(),
+    'user-detail' => userShowOne($_GET['id']),
+    'user-create' => userCreate(),
+    'user-update' => userUpdate($_GET['id']),
+    'user-delete' => userDelete($_GET['id']),
 };
 
 require_once '../commons/disconnect-db.php';
