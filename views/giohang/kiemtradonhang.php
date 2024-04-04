@@ -75,7 +75,7 @@
 									$xemspdonhang = "index.php?act=xemspdonhang&id=".$id; -->
 									<tr>
 									<td>
-										<h8 class="item_cart"><?=$item['user_name'].' -- '.$item['user_phone'].' -- '.$item['user_phone'].' -- '.$item['user_address'] ?></h8>
+										<h8 class="item_cart"><?=$item['user_name'].' -- '.$item['user_phone'].' -- '.$item['user_address'] ?></h8>
 									</td>
 									<td>
 										<strong><?=$item['product_name']?></strong>
